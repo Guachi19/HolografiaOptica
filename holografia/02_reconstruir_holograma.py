@@ -133,6 +133,7 @@ class HologramReconstructor:
         ).pack(anchor=tk.W)
 
     def load(self) -> None:
+        """Abre un holograma .npz y habilita los controles de reconstruccion."""
         path = filedialog.askopenfilename(
             title="Selecciona el holograma",
             filetypes=[("Hologramas NumPy", "*.npz"), ("Todos los archivos", "*.*")],
@@ -165,6 +166,7 @@ class HologramReconstructor:
         self.update_display()
 
     def schedule_update(self, _value: str | None = None) -> None:
+        """Agrupa cambios rapidos de los deslizadores antes de recalcular."""
         if self.hologram is None:
             return
         if self.update_after_id is not None:
@@ -172,6 +174,7 @@ class HologramReconstructor:
         self.update_after_id = self.root.after(120, self.update_display)
 
     def update_display(self) -> None:
+        """Aplica la pelicula, propaga el campo y actualiza los paneles."""
         self.update_after_id = None
         if self.hologram is None:
             return
@@ -253,6 +256,7 @@ class HologramReconstructor:
         )
 
     def save_reconstructed_image(self) -> None:
+        """Exporta la intensidad reconstruida como PNG o como array NPY."""
         if self.reconstructed_intensity is None or self.path is None:
             return
         source = Path(self.path)
@@ -294,6 +298,7 @@ class HologramReconstructor:
         )
 
     def draw_panels(self, panels: list[tuple]) -> None:
+        """Actualiza las imagenes de la ventana y sus barras de color."""
         shape = panels[0][0].shape
         if self.artists and self.artists[0].get_array().shape == shape:
             for artist, (array, title, _cmap, limits) in zip(self.artists, panels):
@@ -330,6 +335,7 @@ class HologramReconstructor:
         self.canvas.draw_idle()
 
     def save(self) -> None:
+        """Guarda una copia del holograma con t0 y beta actuales."""
         if self.hologram is None:
             return
         initial = f"{Path(self.path).stem}_ajustado.npz"
@@ -366,6 +372,7 @@ class HologramReconstructor:
 
 
 def main() -> None:
+    """Crea la ventana principal y ejecuta el bucle de Tkinter."""
     root = tk.Tk()
     HologramReconstructor(root)
     root.mainloop()

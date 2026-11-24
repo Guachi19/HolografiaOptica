@@ -8,6 +8,16 @@ Dos aplicaciones de escritorio, ejecutables directamente con Python, comparten
 - `02_reconstruir_holograma.py`: abre el `.npz`, ilumina su pelicula y propaga
   el campo mediante el metodo del espectro angular.
 
+## Archivos principales
+
+- `funciones_opticas.py` contiene los calculos, la propagacion y la lectura y
+  escritura del formato `.npz`.
+- `01_generar_holograma.py` y `02_reconstruir_holograma.py` son las interfaces
+  para grabar y reconstruir, respectivamente.
+- `test_funciones_opticas.py` comprueba los calculos principales y el intercambio
+  de archivos.
+- `hologramas/` es la carpeta sugerida para guardar los resultados.
+
 ## Instalacion y ejecucion
 
 Instala las dependencias desde esta carpeta. No se necesita Streamlit. En Windows,

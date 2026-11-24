@@ -121,6 +121,7 @@ class HologramGenerator:
         ).pack(anchor=tk.W)
 
     def load_image(self) -> None:
+        """Carga una imagen y prepara los campos que se usan para grabarla."""
         path = filedialog.askopenfilename(
             title="Selecciona la imagen del objeto",
             filetypes=[
@@ -156,10 +157,12 @@ class HologramGenerator:
         self.draw_panels()
 
     def update_transmission(self, _value: str | None = None) -> None:
+        """Vuelve a dibujar la pelicula cuando cambia uno de sus parametros."""
         if self.interference is not None:
             self.draw_panels()
 
     def draw_panels(self) -> None:
+        """Muestra la imagen, los campos, la interferencia y la pelicula."""
         if (
             self.image is None
             or self.object_field is None
@@ -219,6 +222,7 @@ class HologramGenerator:
         self.canvas.draw_idle()
 
     def save(self) -> None:
+        """Guarda el holograma y los parametros actuales en un archivo .npz."""
         if (
             self.image is None
             or self.object_field is None
@@ -271,6 +275,7 @@ class HologramGenerator:
 
 
 def main() -> None:
+    """Crea la ventana principal y ejecuta el bucle de Tkinter."""
     root = tk.Tk()
     HologramGenerator(root)
     root.mainloop()

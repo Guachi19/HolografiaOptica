@@ -364,10 +364,12 @@ def load_hologram(source: str | Path | bytes | bytearray | BinaryIO) -> dict[str
 
 
 def _validate_wavelength(wavelength_m: float) -> None:
+    """Rechaza longitudes de onda que no sean positivas y finitas."""
     if not np.isfinite(wavelength_m) or wavelength_m <= 0:
         raise ValueError("La longitud de onda debe ser positiva y finita.")
 
 
 def _validate_matching_fields(first: np.ndarray, second: np.ndarray) -> None:
+    """Comprueba que dos campos sean matrices 2D con la misma forma."""
     if np.shape(first) != np.shape(second) or np.ndim(first) != 2:
         raise ValueError("Los campos deben ser matrices 2D con dimensiones iguales.")
